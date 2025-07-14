@@ -1,5 +1,7 @@
+#include "cmd.h"
 
+int main(int argc, char *argv[]) {
+	// init();
 
-int main() {
 	return 0;
 }

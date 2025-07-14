@@ -3,16 +3,20 @@ ldflags =
 
 .PHONY: clean
 
-all: clean ../osapi/osapi.o cmd.com
+all: clean clean-osapi cmd.com
 
 cmd.com: cmd.o ../osapi/osapi.o
 	cc $(flags) $^ -o $@ $(ldflags)
 
 cmd.o: cmd.c cmd.h
-	cc $(flags) -c $< -o $@
+	cc $(flags) -c $<
 
 ../osapi/osapi.o:
-	$(MAKE) -C ../osapi
+	$(MAKE) -C ../osapi -sk "CFLAGS=$(flags)"
+
+clean-osapi:
+	cd ../osapi
+	$(MAKE) clean
 
 clean:
 	rm -f *.o cmd.com
